@@ -5,7 +5,7 @@ from flask_script import Manager, Server
 from app.models import Users,  post
 from flask_migrate import Migrate, MigrateCommand
 
-app = create_app('production')
+app = create_app()
 
 
 manager = Manager(app)
