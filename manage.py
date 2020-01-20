@@ -2,10 +2,13 @@ from app import creat_app, db
 from flask_script import Manager, Server
 
 
-from app.models import Users,  post
+from app.models import Users,  Post,Comment
 from flask_migrate import Migrate, MigrateCommand
+from app import create_app  
+
 
 app = create_app()
+
 
 
 manager = Manager(app)
