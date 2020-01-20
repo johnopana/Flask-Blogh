@@ -1,22 +1,63 @@
-{% extends 'base.html'%}
-{% import 'bootstrap/wtf.html' as wtf%}
-
-{% block styles%}
-{{ super() }}
-<link rel="stylesheet" href="{{url_for('static',filename='css/register.css')}}">
-{% endblock %}
-
-
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Page Title</title>
+  <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+      <div class='row',style='position:absolute;'>
+        <div class="col-md-6">
+          <div class='card'>
+            <div class='card-header'>
+             {{post.title}}
+             </div>
+             <br>
+             <div class='card-body'>
+             {{post.content}}
+             <div class='card-footer'>
+             <p><a href="{{url_for('main.new_comment',id=post.id)}}">Add a comment</a></p>
+              </div>
+             </div>
+        </div>
+        <div class="col-md-4",style='background-color:blue;opacity:0.7;'>
+            <div class='card'style='background-color:grey;color:white'>
+              {% for comment in post.comments.all() %}
+              <div class='card-body'>{{ comment.content }}</div>
+              <div class='card-footer'><p><a href="{{url_for('main.delete_comment',id=post.id,comment_id=comment.id)}}">delete Comment</a></p></div>
+               {% endfor %}
+            </div>
+        </div>
+        </div>
+    </div>
+    </body>
+    </html>
+1:14
+{% extends 'auth/auth-base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
 {% block content %}
-<div class="container content-section">
-    <h1>Register</h1>
-    <br>
-    {{wtf.quick_form(registration_form)}}
+<div class="col-md-6 col-md-offset-3">
+  {{wtf.quick_form(registration_form)}}
+</div>
+{% endblock%}
 
-<div class="border-top pt-3">
-    <small class="text-muted">
-        Already Have An Account? <a class="ml-2" href="{{ url_for('auth.login') }}">Sign In</a>
-    </small>
-</div>
-</div>
-{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+Message Peter Kuria:bus: Commuting
+
+
