@@ -10,16 +10,25 @@ from werkzeug.security import generate_password_hash, check_password_hash
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-class User(UserMixin, db.Model):
-    __tablename__ = 'users'
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(255), unique=True, nullable=False)
-    email = db.Column(db.String(255), unique=True, index=True, nullable=False)
-    image_file = db.Column(db.String(70), nullable=False, default='default.jpg')
+# class User(UserMixin, db.Model):
+    # __tablename__ = 'users'
+    # id = db.Column(db.Integer, primary_key=True)
+    # username = db.Column(db.String(255), unique=True, nullable=False)
+    # email = db.Column(db.String(255), unique=True, index=True, nullable=False)
+    # image_file = db.Column(db.String(70), nullable=False, default='default.jpg')
+    # comments = db.relationship('Comments', backref='user', lazy='dynamic')
+class User(UserMixin,db.Model):
+    __tablename__='users'
+    id = db.Column(db.Integer,primary_key = True)
+    username = db.Column(db.String(255),index = True)
+    email = db.Column(db.String(255),index = True)
+    # bio = db.Column(db.String(255))
+    profile_pic_path = db.Column(db.String())
+    password_hash = db.Column(db.String(255))
     comments = db.relationship('Comments', backref='user', lazy='dynamic')
 
-    def __repr__(self):
-        return f'User {self.username}'
+    # def __repr__(self):
+    #     return f'User {self.username}'
 
     pass_secure = db.Column(db.String(255))
 
@@ -48,6 +57,15 @@ class Post(db.Model):
     author = db.Column(db.String(15), nullable=False, default='Keith Mzaza')
     comment = db.relationship('Comments', backref='post', lazy='dynamic')
 
+
+    def save_comment(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+    
     def __repr__(self):
         return f"Post( '{self.title}', '{self.date_posted}')"
 
@@ -70,3 +88,7 @@ class Comments(db.Model):
     def save_comments(self):
         db.session.add(self)
         db.session.commit()
+
+        
+    def __str__(self):
+        return self.user.username
