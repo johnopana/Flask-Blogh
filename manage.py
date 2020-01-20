@@ -1,9 +1,11 @@
 from app import creat_app, db
 from flask_script import Manager, Server
-
-
 from app.models import Users,  Post,Comment
+from config import Config
 from flask_migrate import Migrate, MigrateCommand
+from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, render_template, redirect, request
+import os
 from app import create_app  
 
 
