@@ -50,5 +50,5 @@ class Comments(db.Model):
         db.session.commit()
     def delete_comment(self):
         db.session.delete(self)
-        de.session.commit()
+        db.session.commit()
     #a method to delete comments

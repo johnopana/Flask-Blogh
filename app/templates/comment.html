@@ -15,18 +15,20 @@
         <div class="col-md-6">
           <div class='card'>
             <div class='card-header'>
-             {{post.title}}
+              {{post.title}}
              </div>
              <br>
              <div class='card-body'>
-             {{post.content}}
-             <div class='card-footer'>
+              {{post.content}}<br>
+             <div class='card-footer display-flex'>
              <p><a href="{{url_for('main.new_comment',id=post.id)}}">Add a comment</a></p>
               </div>
              </div>
         </div>
-        <div class="col-md-4",style='background-color:blue;opacity:0.7;'>
-            <div class='card'style='background-color:grey;color:white'>
+        </div>
+      </br>
+        <div class="col-md-4">
+            <div class='card'>
               {% for comment in post.comments.all() %}
               <div class='card-body'>{{ comment.content }}</div>
               <div class='card-footer'><p><a href="{{url_for('main.delete_comment',id=post.id,comment_id=comment.id)}}">delete Comment</a></p></div>

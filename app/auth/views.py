@@ -1,7 +1,3 @@
-from flask import Blueprint
-main=Blueprint('main',__name__)
-from . import views,errors
-1:21
 from flask import render_template,redirect,url_for,request,flash
 from . import auth
 from flask_login import login_user,logout_user,login_required
@@ -35,7 +31,7 @@ def login():
             login_user(user,login_form.remember.data)
             return redirect(request.args.get('next')or url_for('main.index'))
         flash('invalid username or password')
-    title ="One Minute Pitch|Login"
+    title ="flask-blog|Login"
     return render_template('auth/login.html',login_form=login_form,title=title)
 #logout function
 @auth.route('/logout')

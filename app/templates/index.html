@@ -7,26 +7,47 @@
      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
   </head>
-  <body style='background-color:#4a8079;background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));'>
+  <body >
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <a class="nav-link" href="{{ url_for('main.index') }}">Home <span class="sr-only">(current)</span></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    {% if current_user.is_anonymous %}
+                    <a class="nav-link"href="{{ url_for('auth.login') }}">Login</a>
+                      {% else %}
+                      <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
+                      {% endif %}
+                </li>           
+              
+            
+          </div>
+        </nav>        
+    
     <div class='container',style='justify-content:space-between'>
-    <h1>{{title}}</h1>
-      <h2><a href='/post'>make a post</a></h2>
+    <h1 style='text-align: center'>{{title}}</h1>
+      <h2 style="text-align:center"><a href='/post'>Create Your New Post</a></h2>
         {%for post in posts%}
         <ul>
           <li style='list-style-type:none;'>
-           <div class='row'>
+           <div class='row'style="justify-content:center">
             <div class=col-md-6>
+              <div style="justify-content:center">
                <div class="card">
               <div class="card-header"><h3>{{post.title}}</h3></div>
               <div class="card-body"><p>{{post.content}}</p></div>
              <div class="card-footer"><p><a href="{{url_for('main.view_comment',id=post.id)}}">view comments</a></p></div>
-     </div>
-     </div>
-    </div>
-  </li>
-  </ul>
+            </div>
+          </div>
+        </div>
+      </li>
+     </ul>
     </div>
     {%endfor%}
     </div>
-    </body>
-    </htm
+  </body>
+  </htm

@@ -8,7 +8,7 @@ from app import db
 def index():
     '''a function to take a user to the home page'''
     posts=Blogpost.query.all()
-    title="welcome to our new blog post"
+    title="Welcome To New Post-Blogh App"
     return render_template('index.html',title=title,posts=posts)
 @main.route('/user/<uname>')
 def profile(uname):
@@ -60,4 +60,4 @@ def new_comment(id):
 @main.route('/post/comment/delete/<int:id>')
 def delete_comment(id):
     post=Blogpost.query.get(id)
-    return (post.title)
+    pass
